@@ -1,16 +1,13 @@
-FROM golang:1.24.1 AS builder
+FROM --platform=$BUILDPLATFORM golang:1.24 AS build
 ARG GIT_VERSION_TAG=undefined
 
-WORKDIR /app
-
+WORKDIR /go/src/app
+COPY go.mod go.sum ./
+RUN go mod download
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o server .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags "-s -w" -o /go/bin/app
 
-ENTRYPOINT ["/app/server"]
-
-FROM scratch
-
-COPY --from=builder /app/server /server
-
-ENTRYPOINT ["/server"]
+FROM gcr.io/distroless/static-debian12
+COPY --from=build /go/bin/app /
+CMD ["/app"]
