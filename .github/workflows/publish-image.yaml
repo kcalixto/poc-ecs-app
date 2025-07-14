@@ -72,7 +72,7 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
         build-args: |
-          GIT_VERSION_TAG=${{ workflow.inputs.tag }}
+          GIT_VERSION_TAG=${{ inputs.tag }}
           GH_ACCESS_TOKEN=${{ secrets.GH_TOKEN }}
 
     - name: Setup Node.js

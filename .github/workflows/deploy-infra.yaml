@@ -34,7 +34,7 @@ jobs:
 
     - name: Deploy to AWS ECS Fargate
       env:
-        IMAGE_TAG: ${{ workflow.inputs.tag }}
+        IMAGE_TAG: ${{ inputs.tag }}
         IMAGE_NAME: ${{ env.IMAGE_NAME }}
       run: |
         cd infra
