@@ -31,6 +31,12 @@ jobs:
       with:
         node-version: '20.x'
 
+    - name: Debug metadata
+      run: |
+        echo "Tags: ${{ steps.meta.outputs.tags }}"
+        echo "Input tag: ${{ inputs.tag }}"
+        echo "Image name: ${{ env.IMAGE_NAME }}"
+
     - name: Deploy CDK Stack
       env:
         IMAGE_TAG: ${{ inputs.tag }}

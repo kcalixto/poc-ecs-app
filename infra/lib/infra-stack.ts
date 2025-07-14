@@ -13,11 +13,17 @@ export class InfraStack extends cdk.Stack {
       type: "String",
       description: "Name of the ECR repository to deploy",
     });
+    if (repositoryName.valueAsString === "") {
+      throw new Error("Repository name must be provided");
+    }
 
     const imageTag = new cdk.CfnParameter(this, "imageTag", {
       type: "String",
       description: "Tag of the Docker image to deploy",
     });
+    if (imageTag.valueAsString === "") {
+      throw new Error("Image tag must be provided");
+    }
 
     const repository = ecr.Repository.fromRepositoryName(
       this,
