@@ -1,0 +1,26 @@
+name: Tag
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: "${{ github.repository }}-${{ github.workflow }}-${{ github.ref }}"
+
+jobs:
+  tag:
+    permissions: write-all
+    name: 🏷️ tag patch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: New tag
+        id: create_tag
+        uses: anothrNick/github-tag-action@1.61.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
