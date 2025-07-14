@@ -51,16 +51,6 @@ export class InfraStack extends cdk.Stack {
           desiredCount: 1,
           maxHealthyPercent: 100,
           minHealthyPercent: 0,
-          healthCheck: {
-            command: [
-              "CMD-SHELL",
-              "curl -f http://localhost:8080/health || exit 1",
-            ],
-            interval: cdk.Duration.seconds(60),
-            timeout: cdk.Duration.seconds(5),
-            retries: 3,
-          },
-          healthCheckGracePeriod: cdk.Duration.seconds(60),
           publicLoadBalancer: true,
           circuitBreaker: {
             enable: true,

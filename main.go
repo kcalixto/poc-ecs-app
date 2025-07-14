@@ -10,7 +10,8 @@ import (
 func main() {
 	r := gin.Default()
 
-	r.GET("/health", func(c *gin.Context) {
+	// health
+	r.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "OK")
 	})
 
