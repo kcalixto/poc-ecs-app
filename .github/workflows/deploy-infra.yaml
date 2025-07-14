@@ -11,7 +11,7 @@ env:
   IMAGE_NAME: 'sample_app'
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -31,7 +31,7 @@ jobs:
       with:
         node-version: '20.x'
 
-    - name: Deploy to AWS ECS Fargate
+    - name: Deploy CDK Stack
       env:
         IMAGE_TAG: ${{ inputs.tag }}
         IMAGE_NAME: ${{ env.IMAGE_NAME }}
