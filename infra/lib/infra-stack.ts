@@ -44,6 +44,10 @@ export class InfraStack extends cdk.Stack {
           memoryLimitMiB: 512,
           desiredCount: 1,
           publicLoadBalancer: true,
+          circuitBreaker: {
+            enable: true,
+            rollback: true,
+          },
           taskImageOptions: {
             image: ecs.ContainerImage.fromEcrRepository(
               repository,
@@ -53,7 +57,6 @@ export class InfraStack extends cdk.Stack {
             environment: {
               SERVER_PORT: "8080",
             },
-            // Pass API key as a secret from SSM
             secrets: {
               API_KEY: ecs.Secret.fromSsmParameter(someParameter),
             },
