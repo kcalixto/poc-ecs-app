@@ -8,7 +8,7 @@ on:
     outputs:
       image-name:
         description: "Image name"
-        value: ${{ env.IMAGE_NAME }}
+        value: 'sample_app'
     inputs:
       tag:
         required: true
