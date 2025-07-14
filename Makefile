@@ -1,14 +1,17 @@
+run-app:
+	@echo "Running application..."
+	go run .
+
 build-app:
 	@echo "Building application..."
-	# Add your build commands here
+	CGO_ENABLED=0 GOOS=linux go build -ldflags "-s -w" -o bin/app
 
 test-app:
 	@echo "Testing application..."
-	go test ./app/...
+	go test ./...
 
 deploy-app: test-app build-app
 	@echo "Deploying application..."
-	# Add your build commands here
 
 test-infra:
 	@echo "Testing infrastructure..."
