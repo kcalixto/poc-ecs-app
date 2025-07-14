@@ -21,10 +21,10 @@ jobs:
       tag: ${{ needs.create-tag.outputs.tag }}
       image-name: 'sample_app'
 
-  # deploy-infra:
-  #   needs: publish-image
-  #   uses: ./.github/workflows/deploy-infra.yaml
-  #   secrets: inherit
-  #   with:
-  #     tag: ${{ needs.create-tag.outputs.tag }}
-  #     image-name: 'sample_app'
+  deploy-infra:
+    needs: publish-image
+    uses: ./.github/workflows/deploy-infra.yaml
+    secrets: inherit
+    with:
+      tag: ${{ needs.create-tag.outputs.tag }}
+      image-name: 'sample_app'
