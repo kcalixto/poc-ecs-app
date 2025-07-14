@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,5 +18,9 @@ func main() {
 		c.String(http.StatusOK, "hi, there")
 	})
 
-	r.Run(":8080")
+	port := os.Getenv("SERVER_PORT")
+	if port == "" {
+		port = "8080" // Default port if not set
+	}
+	r.Run(":" + port)
 }
