@@ -7,9 +7,6 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
-env:
-  IMAGE_NAME: 'sample_app'
-
 jobs:
   create-tag:
     permissions: write-all
@@ -22,7 +19,7 @@ jobs:
     secrets: inherit
     with:
       tag: ${{ needs.create-tag.outputs.tag }}
-      image-name: ${{ env.IMAGE_NAME }}
+      image-name: 'sample_app'
 
   # deploy-infra:
   #   needs: publish-image
@@ -30,4 +27,4 @@ jobs:
   #   secrets: inherit
   #   with:
   #     tag: ${{ needs.create-tag.outputs.tag }}
-  #     image-name: ${{ env.IMAGE_NAME }}
+  #     image-name: 'sample_app'
