@@ -21,8 +21,9 @@ jobs:
       tag: ${{ needs.create-tag.outputs.tag }}
 
   deploy-infra:
-    needs: create-tag
+    needs: publish-image
     uses: ./.github/workflows/deploy-infra.yaml
     secrets: inherit
     with:
       tag: ${{ needs.create-tag.outputs.tag }}
+      image-name: ${{ needs.publish-image.outputs.image-name }}

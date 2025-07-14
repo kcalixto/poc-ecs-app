@@ -1,14 +1,18 @@
 name: "Build and Publish"
 
+env:
+  IMAGE_NAME: 'sample_app'
+
 on:
   workflow_call:
+    outputs:
+      image-name:
+        description: "Image name"
+        value: ${{ env.IMAGE_NAME }}
     inputs:
       tag:
         required: true
         type: string
-
-env:
-  IMAGE_NAME: 'sample_app'
 
 jobs:
   test:
