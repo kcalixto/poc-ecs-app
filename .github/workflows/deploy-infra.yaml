@@ -6,9 +6,9 @@ on:
       tag:
         required: true
         type: string
-
-env:
-  IMAGE_NAME: 'sample_app'
+      image-name:
+        required: true
+        type: string
 
 jobs:
   deploy:
@@ -34,7 +34,7 @@ jobs:
     - name: Deploy CDK Stack
       env:
         IMAGE_TAG: ${{ inputs.tag }}
-        IMAGE_NAME: ${{ env.IMAGE_NAME }}
+        IMAGE_NAME: ${{ inputs.image-name }}
       run: |
         cd infra
         npm ci
