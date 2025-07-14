@@ -1,40 +1,21 @@
 package main
 
 import (
-	"fmt"
-	"time"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	SetInterval(
-		func() {
-			fmt.Println("-- Deploying to aws ecs --")
-		},
-		24*time.Hour,
-	)
-	for {
-	}
-}
+	r := gin.Default()
 
-func SetInterval(action func(), interval time.Duration) func() {
-	quit := make(chan struct{})
+	r.GET("/health", func(c *gin.Context) {
+		c.String(http.StatusOK, "OK")
+	})
 
-	go func() {
-		// Run the action immediately
-		action()
-		ticker := time.NewTicker(interval)
-		defer ticker.Stop()
-		for {
-			select {
-			case <-ticker.C:
-				action()
-			case <-quit:
-				return
-			}
-		}
-	}()
+	r.GET("/helloisanyonethere", func(c *gin.Context) {
+		c.String(http.StatusOK, "hi, there")
+	})
 
-	return func() {
-		close(quit)
-	}
+	r.Run(":8080")
 }
