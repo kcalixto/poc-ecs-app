@@ -1,0 +1,28 @@
+name: Orchestrator
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  create-tag:
+    permissions: write-all
+    uses: ./.github/workflows/create-tag.yaml
+    secrets: inherit
+
+  publish-image:
+    needs: create-tag
+    uses: ./.github/workflows/publish-image.yaml
+    secrets: inherit
+    with:
+      tag: ${{ needs.create-tag.outputs.tag }}
+
+  deploy-infra:
+    needs: create-tag
+    uses: ./.github/workflows/deploy-infra.yaml
+    secrets: inherit
+    with:
+      tag: ${{ needs.create-tag.outputs.tag }}
