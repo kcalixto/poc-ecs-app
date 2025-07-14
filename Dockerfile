@@ -1,4 +1,5 @@
 FROM golang:1.24.1 AS builder
+ARG GIT_VERSION_TAG=undefined
 
 WORKDIR /app
 
