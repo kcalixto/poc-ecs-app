@@ -22,7 +22,7 @@ jobs:
       image-name: 'sample_app'
 
   deploy-infra:
-    needs: publish-image
+    needs: [publish-image, create-tag]
     uses: ./.github/workflows/deploy-infra.yaml
     secrets: inherit
     with:
