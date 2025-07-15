@@ -5,7 +5,7 @@ import * as ecs from "aws-cdk-lib/aws-ecs";
 import * as ecsPatterns from "aws-cdk-lib/aws-ecs-patterns";
 import * as ssm from "aws-cdk-lib/aws-ssm";
 
-export class InfraStack extends cdk.Stack {
+export class PocECSAppStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
