@@ -15,7 +15,7 @@ func main() {
 		c.String(http.StatusOK, "OK")
 	})
 
-	r.GET("/helloisanyonethere", func(c *gin.Context) {
+	r.GET("/helloisanyonehere", func(c *gin.Context) {
 		c.String(http.StatusOK, "hi, there")
 	})
 
