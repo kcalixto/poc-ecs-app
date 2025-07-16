@@ -30,7 +30,8 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    needs: test
+    environment: develooopment
     steps:
       - name: Checkout
         uses: actions/checkout@v4
